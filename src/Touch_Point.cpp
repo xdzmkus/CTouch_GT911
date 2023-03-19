@@ -8,7 +8,6 @@ Touch_Point::Touch_Point(uint8_t id, uint16_t x, uint16_t y, uint16_t size) : id
 {
 }
 
-
 bool Touch_Point::operator==(Touch_Point point) const
 {
 	return ((point.x == x) && (point.y == y) && (point.size == size));
@@ -18,3 +17,4 @@ bool Touch_Point::operator!=(Touch_Point point) const
 {
 	return ((point.x != x) || (point.y != y) || (point.size != size));
 }
+

@@ -27,6 +27,11 @@ public:
 
     void init(isr_TouchDetected onTouchDetected = NULL);
 
+    void setDimensions(uint16_t screenWidth = 320, uint16_t screenHeight = 480);
+
+    // 0:Portrait  1:Landscape  2:Portrait upside down  3:Landscape (flipped)
+    void setRotation(uint8_t screenOrientation);
+
     void process();
 
     void setCallback_1_PointTouched(cb_1_Point_Touched cb);
@@ -52,6 +57,11 @@ private:
     const uint8_t pin_int;
     const uint8_t pin_rst;
     const uint8_t dev_addr;
+
+    uint16_t _screenWidth;
+    uint16_t _screenHeight;
+
+    uint8_t _screenOrientation;
 
     Touch_Point points[5];
 

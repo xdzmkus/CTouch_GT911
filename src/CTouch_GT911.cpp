@@ -5,6 +5,9 @@
 GT911::GT911(uint8_t C_SDA, uint8_t C_SCL, uint8_t C_INT, uint8_t C_RST, uint8_t I2C_ADDR)
 	: pin_sda(C_SDA), pin_scl(C_SCL), pin_int(C_INT), pin_rst(C_RST), dev_addr(I2C_ADDR)
 {
+    _screenWidth = 320;
+    _screenHeight = 480;
+    _screenOrientation = 0;
 }
 
 void GT911::init(isr_TouchDetected onTouchDetected)
@@ -42,6 +45,19 @@ void GT911::init(isr_TouchDetected onTouchDetected)
 
     Wire.setClock(400000);          // I2C port speed.
     Wire.begin(pin_sda, pin_scl);   // I2C port start.
+}
+
+void GT911::setDimensions(uint16_t screenWidth, uint16_t screenHeight)
+{
+    _screenWidth = screenWidth;
+    _screenHeight = screenHeight;
+}
+
+void GT911::setRotation(uint8_t screenOrientation)
+{
+    if (screenOrientation > 3) return;
+
+    _screenOrientation = screenOrientation;
 }
 
 void GT911::process()
@@ -115,6 +131,35 @@ Touch_Point GT911::parsePoint(uint8_t* data)
     uint16_t x = data[1] + (data[2] << 8);
     uint16_t y = data[3] + (data[4] << 8);
     uint16_t size = data[5] + (data[6] << 8);
+
+    uint16_t temp;
+
+    switch (_screenOrientation)
+    {
+    case 0: // Portrait
+        // Do nothing, coordinates are already in the correct orientation
+        break;
+    case 1: // Landscape
+        // Swap x and y coordinates and invert the y-axis
+        temp = x;
+        x = _screenHeight - y;
+        y = temp;
+        break;
+    case 2: // Portrait upside down
+        // Invert x and y coordinates
+        x = _screenWidth - x;
+        y = _screenHeight - y;
+        break;
+    case 3: // Landscape (flipped)
+        // Swap x and y coordinates and invert the x-axis
+        temp = x;
+        x = y;
+        y = _screenWidth - temp;
+        break;
+    default:
+        // Invalid screen orientation
+        break;
+    }
 
     return Touch_Point(id, x, y, size);
 }
