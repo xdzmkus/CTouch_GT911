@@ -49,14 +49,16 @@ void setup()
     Serial.println("GT911 Example: Touch screen and enjoy");
 
     gfx->begin();
+    gfx->setRotation(3);
     gfx->fillScreen(BLACK);
     gfx->setTextSize(5);
     gfx->setTextColor(RED);
-
     gfx->setCursor(5, 5);
     gfx->printf("Touch me");
 
     ts.init(isr_On_Touched);
+    ts.setDimensions(320, 480);
+    ts.setRotation(3);
     ts.setCallback_1_PointTouched(on_1_PointTouched);
 }
 

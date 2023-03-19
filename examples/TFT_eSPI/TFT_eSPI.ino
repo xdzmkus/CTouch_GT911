@@ -52,11 +52,12 @@ void setup()
     Serial.println("GT911 Example: Touch screen and enjoy");
 
     tft.init();
-    tft.setRotation(0);
-    
+    tft.setRotation(1);
     tft.fillScreen(TFT_BLACK);
 
     ts.init(isr_On_Touched);
+    ts.setDimensions(screenWidth, screenHeight);
+    ts.setRotation(1);
     ts.setCallback_1_PointTouched(on_1_PointTouched);
 }
 

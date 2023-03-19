@@ -75,10 +75,8 @@ void setup()
 	Serial.println("GT911 Example: Touch screen and enjoy");
 
 	ts.init(isr_On_Touched);
-
 	ts.setDimensions(320, 480);
-
-	ts.setRotation(3);
+	ts.setRotation(2);
 
 	ts.setCallback_1_PointTouched(on_1_PointTouched);
 	ts.setCallback_2_PointTouched(on_2_PointTouched);

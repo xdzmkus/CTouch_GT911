@@ -140,10 +140,10 @@ Touch_Point GT911::parsePoint(uint8_t* data)
         // Do nothing, coordinates are already in the correct orientation
         break;
     case 1: // Landscape
-        // Swap x and y coordinates and invert the y-axis
+        // Swap x and y coordinates and invert the x-axis
         temp = x;
-        x = _screenHeight - y;
-        y = temp;
+        x = y;
+        y = _screenWidth - temp;
         break;
     case 2: // Portrait upside down
         // Invert x and y coordinates
@@ -151,10 +151,10 @@ Touch_Point GT911::parsePoint(uint8_t* data)
         y = _screenHeight - y;
         break;
     case 3: // Landscape (flipped)
-        // Swap x and y coordinates and invert the x-axis
+        // Swap x and y coordinates and invert the y-axis
         temp = x;
-        x = y;
-        y = _screenWidth - temp;
+        x = _screenHeight - y;
+        y = temp;
         break;
     default:
         // Invalid screen orientation
