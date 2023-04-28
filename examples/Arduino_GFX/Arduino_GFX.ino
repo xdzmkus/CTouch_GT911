@@ -5,7 +5,7 @@
 #define TFT_SCLK 18
 #define TFT_CS   15  // Chip select control pin
 #define TFT_DC   2   // Data Command control pin
-#define TFT_RST  4   // Reset pin (could connect to RST pin)
+#define TFT_RST  GFX_NOT_DEFINED // 4 - Reset pin (could connect to RST pin)
 
 /* More data bus class: https://github.com/moononournation/Arduino_GFX/wiki/Data-Bus-Class */
 Arduino_DataBus* bus = new Arduino_ESP32SPI(TFT_DC /* DC */, TFT_CS /* CS */, TFT_SCLK /* SCK */, TFT_MOSI /* MOSI */, TFT_MISO /* MISO */, VSPI /* spi_num */);

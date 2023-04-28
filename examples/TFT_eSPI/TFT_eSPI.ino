@@ -3,7 +3,7 @@
 // TFT_SCLK 18
 // TFT_CS   15  // Chip select control pin
 // TFT_DC   2   // Data Command control pin
-// TFT_RST  4   // Reset pin (could connect to RST pin)
+// TFT_RST  -1  // 4   // Reset pin (could connect to RST pin)
 
 #include <TFT_eSPI.h>
 
